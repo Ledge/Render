@@ -5,11 +5,19 @@ import javax.vecmath.Vector3f;
 
 public interface ICamera {
 
+    public void lookTrough();
+
+    public void updateFrustum();
+
     public Vector3f getPosition();
+
+    public Vector3f getUp();
 
     public Vector3f getViewDirection();
 
-    public ICamera setFOV(float fov);
+    public ViewFrustum getViewFrustum();
+
+    public ICamera extendFov(float fov);
 
     public Matrix4f getViewMatrix();
 
