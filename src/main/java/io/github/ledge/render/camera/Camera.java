@@ -1,5 +1,7 @@
 package io.github.ledge.render.camera;
 
+import io.github.ledge.utils.MatrixUtil;
+
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
@@ -31,7 +33,7 @@ public abstract class Camera implements ICamera {
         if (this.view == null || this.projection == null)
             return;
 
-        // this.viewFrustum.update();
+        this.viewFrustum.update(MatrixUtil.toFloatBuffer(this.view), MatrixUtil.toFloatBuffer(this.projection));
     }
 
     public abstract void loadProjectionMatrix();
