@@ -11,6 +11,12 @@
     <dependencies>
         <dependency>
             <groupId>io.github.ledge</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ledge</groupId>
             <artifactId>engine</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -18,46 +24,6 @@
 
     <build>
         <plugins>
-            <!-- Shade -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>junit:junit</exclude>
-                                    <exclude>jmock:*</exclude>
-                                    <exclude>*:xml-apis</exclude>
-                                </excludes>
-                            </artifactSet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Natives -->
-            <plugin>
-                <groupId>com.googlecode.mavennatives</groupId>
-                <artifactId>maven-nativedependencies-plugin</artifactId>
-                <version>0.0.5</version>
-                <executions>
-                    <execution>
-                        <id>unpacknatives</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!--clean up-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
