@@ -23,6 +23,8 @@ public interface ICamera {
 
     public Matrix4f getProjectionMatrix();
 
+    public Matrix4f getNormalizedModelViewMatrix();
+
     public float getZFar();
 
     public void setZFar(float z);

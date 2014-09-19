@@ -1,5 +1,6 @@
 package io.github.ledge.render.camera;
 
+import io.github.ledge.common.math.collision.BoundingBox;
 import org.lwjgl.BufferUtils;
 
 import javax.vecmath.Vector3f;
@@ -101,7 +102,38 @@ public class ViewFrustum {
         planes[5].normalize();
     }
 
-    // TODO: public boolean intersects(BoundingBox box) {}
+    public boolean intersects(BoundingBox box) {
+        for (int i = 0; i < 6; i++) {
+            FrustumPlane plane = this.planes[i];
+
+            if (plane.getA() * box.maxX() + plane.getB() * box.maxY() + plane.getC() * box.maxZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.minX() + plane.getB() * box.maxY() + plane.getC() * box.maxZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.maxX() + plane.getB() * box.minY() + plane.getC() * box.maxZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.maxX() + plane.getB() * box.maxY() + plane.getC() * box.minZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.minX() + plane.getB() * box.minY() + plane.getC() * box.maxZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.maxX() + plane.getB() * box.minY() + plane.getC() * box.minZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.minX() + plane.getB() * box.maxY() + plane.getC() * box.minZ() + plane.getD() <= 0)
+                return false;
+
+            if (plane.getA() * box.minX() + plane.getB() * box.minY() + plane.getC() * box.minZ() + plane.getD() <= 0)
+                return false;
+
+        }
+
+        return true;
+    }
 
     public boolean intersects(Vector3f position, float radius) {
         for (int i = 0; i < 6; i++) {

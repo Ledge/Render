@@ -13,11 +13,12 @@ public abstract class Camera implements ICamera {
 
     protected Matrix4f projection = new Matrix4f();
     protected Matrix4f view = new Matrix4f();
+    protected Matrix4f normView = new Matrix4f();
 
     protected float near = 0;
     protected float far = 100;
 
-    protected float targetFov = 100; // TODO: make configuration
+    protected float targetFov = 90; // TODO: make configuration
     protected float activeFov = targetFov / 4;
 
     protected ViewFrustum viewFrustum = new ViewFrustum();
@@ -40,7 +41,9 @@ public abstract class Camera implements ICamera {
 
     public abstract void loadViewMatrix();
 
-    public abstract void update();
+    public abstract void loadNormalizedModelViewMatrix();
+
+    public abstract void update(float interpolation);
 
     @Override
     public Vector3f getPosition() {
@@ -76,6 +79,11 @@ public abstract class Camera implements ICamera {
     @Override
     public Matrix4f getProjectionMatrix() {
         return this.projection;
+    }
+
+    @Override
+    public Matrix4f getNormalizedModelViewMatrix() {
+        return this.normView;
     }
 
     @Override
